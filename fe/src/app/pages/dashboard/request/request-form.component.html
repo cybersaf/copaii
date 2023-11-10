@@ -1,0 +1,20 @@
+<form (ngSubmit)="submitEventForm()" #requestFrom="ngForm">
+  <div>
+    <nb-select class="w-100 mb-3" placeholder="Provider" [(selected)]="form.provider" status="primary">
+      <nb-option *ngFor="let p of providers" [value]="p.id" [textContent]="p.name"></nb-option>
+    </nb-select>
+  </div>
+  <div class="form-group">
+    <nb-select class="w-100" placeholder="Amount" [(selected)]="form.amount" status="primary">
+      <nb-option value="10">10$</nb-option>
+      <nb-option value="15">15$</nb-option>
+      <nb-option value="25">25$</nb-option>
+      <nb-option value="50">50$</nb-option>
+    </nb-select>
+  </div>
+  <div class="form-group">
+    <button class="float-right" type="submit" nbButton status="danger" [disabled]="!form.provider || !form.amount">
+      Submit
+    </button>
+  </div>
+</form>

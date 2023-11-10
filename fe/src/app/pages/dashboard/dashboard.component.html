@@ -1,0 +1,3 @@
+<ngx-patient-dashboard *ngIf="accessChecker.isGranted('view','patient-dashboard') | async"></ngx-patient-dashboard>
+<ngx-provider-dashboard *ngIf="accessChecker.isGranted('view','provider-dashboard') | async"></ngx-provider-dashboard>
+<ngx-donor-dashboard *ngIf="accessChecker.isGranted('view','donor-dashboard') | async"></ngx-donor-dashboard>

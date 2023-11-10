@@ -1,0 +1,11 @@
+[Unit]
+Description=Copaii
+After=syslog.target
+
+[Service]
+User=copaii-app-runner
+ExecStart=/var/spring-apps/copaii.jar
+SuccessExitStatus=143
+
+[Install]
+WantedBy=multi-user.target

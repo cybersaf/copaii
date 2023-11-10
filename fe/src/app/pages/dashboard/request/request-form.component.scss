@@ -1,0 +1,49 @@
+.time-picker {
+  padding-bottom: 0;
+  display: inherit;
+  height: 50px;
+  margin-top: -8px;
+}
+
+.ng-valid[required], .ng-valid.required, .ng-valid[required] .ql-snow, .ng-valid.required .ql-snow {
+  border-color: #42A948 !important;
+  border-left: 5px solid;
+}
+
+.ng-invalid:not(form), .ng-invalid:not(form) .ql-snow {
+  border-color: #a94442 !important;
+  border-left: 5px solid;
+}
+
+
+.ng-untouched:not(form), .ng-untouched:not(form) .ql-snow {
+  border-color: #e4e9f2 !important;
+}
+
+ngx-timepicker-time-control {
+  input {
+    background-color: #222b45;
+  }
+}
+
+.ql-container {
+  height: 120px;
+  width: 800px;
+}
+
+.ql-editor.ql-blank::before {
+  color: #848fa7;
+  font-style: normal;
+  font-size: initial;
+}
+
+.ql-toolbar {
+  color: #848fa7;
+
+  .ql-formats {
+    .ql-stroke, .ql-fill, .ql-stroke::before, .ql-fill::before, .ql-picker-label::before, .ql-picker-item.ql-selected {
+      stroke: #848fa7;
+      color: #848fa7;
+    }
+  }
+}

@@ -1,0 +1,70 @@
+name: Build and commit dist to BE repo
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [12.x]
+
+    steps:
+      - name: Create Directories
+        run: |
+          mkdir ui
+          mkdir api
+          
+      - name: Checkout Angular UI Repo
+        uses: actions/checkout@v2
+        with: 
+          path: ui
+
+      - name: Cache node modules
+        uses: actions/cache@v1
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Node ${{ matrix.node-version }} Setup
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+          
+      - name: Build Angular UI code
+        working-directory: ui
+        run: |
+          npm install @angular/cli
+          ./node_modules/.bin/ng build --prod
+
+      - name: Checkout Backend Repo    
+        uses: actions/checkout@v2
+        with:
+          repository: ${{ secrets.BACKEND_REPO }}
+          token: ${{ secrets.ACCESS_TOKEN }}
+          path: api
+
+      - name: Copy dist
+        run: |
+          rm -r api/src/main/resources/static
+          cp -r ui/dist api/src/main/resources/static
+
+      - name: Commit files
+        working-directory: api
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "Github Actions"
+          git status
+          git add -A
+          git commit -m "UI dist updated"
+
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          directory: api
+          github_token: ${{ secrets.ACCESS_TOKEN }}
+          repository: ${{ secrets.BACKEND_REPO }}

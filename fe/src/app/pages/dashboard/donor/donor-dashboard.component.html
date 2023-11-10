@@ -1,0 +1,21 @@
+<nb-card>
+  <nb-card-header>
+    Approved Requests
+  </nb-card-header>
+
+  <nb-card-body>
+    <ng2-smart-table [settings]="approvedSettings" [source]="approvedSource" class="scrollable-container h-100">
+    </ng2-smart-table>
+  </nb-card-body>
+</nb-card>
+
+<nb-card>
+  <nb-card-header>
+    Funded Requests
+  </nb-card-header>
+
+  <nb-card-body>
+    <ng2-smart-table [settings]="fundedSettings" [source]="fundedSource" class="scrollable-container h-100">
+    </ng2-smart-table>
+  </nb-card-body>
+</nb-card>
